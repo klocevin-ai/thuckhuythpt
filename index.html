@@ -30,13 +30,12 @@
     </script>
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js for Survey Charts -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
         
-        /* Custom Styling for Image Logo */
         .logo-img-wrapper {
             position: relative;
             display: inline-block;
@@ -54,7 +53,6 @@
             transform: scale(1.05) rotate(-3deg);
             border-color: rgba(6, 182, 212, 0.8);
         }
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0B0F19; }
         ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 4px; }
@@ -63,6 +61,7 @@
 </head>
 <body class="bg-night-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white">
 
+    <!-- NAVBAR -->
     <nav class="sticky top-0 z-50 bg-night-800/80 backdrop-blur-md border-b border-purple-900/40 px-4 lg:px-8 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -75,13 +74,13 @@
                 </div>
             </div>
 
-            <!-- Navigation Links -->
+            <!-- Desktop Nav -->
             <div class="hidden md:flex items-center gap-1 lg:gap-2">
-                <button onclick="switchTab('insights')" id="tab-btn-insights" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition text-purple-300 bg-purple-900/30 border border-purple-500/30">
-                    <i class="fa-solid fa-newspaper mr-1.5"></i> Thực Trạng THPT
+                <button onclick="switchTab('insights')" id="tab-btn-insights" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200 hover:bg-slate-800">
+                    <i class="fa-solid fa-newspaper mr-1.5"></i> Thực Trạng
                 </button>
                 <button onclick="switchTab('survey')" id="tab-btn-survey" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200 hover:bg-slate-800">
-                    <i class="fa-solid fa-clipboard-question mr-1.5"></i> Khảo Sát (15 Câu)
+                    <i class="fa-solid fa-clipboard-question mr-1.5"></i> Khảo Sát
                 </button>
                 <button onclick="switchTab('calculator')" id="tab-btn-calculator" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200 hover:bg-slate-800">
                     <i class="fa-solid fa-bed mr-1.5"></i> Tính Giấc Ngủ
@@ -89,55 +88,56 @@
                 <button onclick="switchTab('pomodoro')" id="tab-btn-pomodoro" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200 hover:bg-slate-800">
                     <i class="fa-solid fa-stopwatch mr-1.5"></i> Pomodoro & Sound
                 </button>
-                <button onclick="switchTab('handbook')" id="tab-btn-handbook" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200 hover:bg-slate-800">
-                    <i class="fa-solid fa-book-medical mr-1.5"></i> Cẩm Nang
+                <button onclick="switchTab('handbook')" id="tab-btn-handbook" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition text-purple-300 bg-purple-900/30 border border-purple-500/30">
+                    <i class="fa-solid fa-book-medical mr-1.5"></i> Cẩm Nang Toàn Diện
                 </button>
                 <button onclick="switchTab('ai-advisor')" id="tab-btn-ai-advisor" class="tab-btn px-3 py-2 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200 hover:bg-slate-800">
                     <i class="fa-solid fa-robot mr-1.5"></i> AI Gemini
                 </button>
             </div>
 
-            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white">
+            <!-- Mobile Toggle Button -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white focus:outline-none">
                 <i class="fa-solid fa-bars text-xl"></i>
             </button>
         </div>
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden mt-3 pt-3 border-t border-purple-900/30 flex flex-col gap-2">
-            <button onclick="switchTab('insights'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-purple-300 bg-purple-900/30">
+            <button onclick="switchTab('insights'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
                 <i class="fa-solid fa-newspaper mr-2"></i> Thực Trạng THPT
             </button>
-            <button onclick="switchTab('survey'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300">
+            <button onclick="switchTab('survey'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
                 <i class="fa-solid fa-clipboard-question mr-2"></i> Khảo Sát (15 Câu)
             </button>
-            <button onclick="switchTab('calculator'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300">
+            <button onclick="switchTab('calculator'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
                 <i class="fa-solid fa-bed mr-2"></i> Tính Chu Kỳ Giấc Ngủ
             </button>
-            <button onclick="switchTab('pomodoro'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300">
+            <button onclick="switchTab('pomodoro'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
                 <i class="fa-solid fa-stopwatch mr-2"></i> Pomodoro & Sound
             </button>
-            <button onclick="switchTab('handbook'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300">
-                <i class="fa-solid fa-book-medical mr-2"></i> Cẩm Nang Sức Khỏe
+            <button onclick="switchTab('handbook'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-purple-300 bg-purple-900/30">
+                <i class="fa-solid fa-book-medical mr-2"></i> Cẩm Nang Toàn Diện
             </button>
-            <button onclick="switchTab('ai-advisor'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300">
+            <button onclick="switchTab('ai-advisor'); toggleMobileMenu()" class="text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
                 <i class="fa-solid fa-robot mr-2"></i> Tư Vấn AI Gemini
             </button>
         </div>
     </nav>
 
+    <!-- MAIN CONTENT -->
     <main class="max-w-7xl mx-auto px-4 lg:px-8 py-8 flex-1 w-full">
 
-        <!-- SECTION 0: THỰC TRẠNG & KHÁI NIỆM (MỚI) -->
-        <section id="section-insights" class="tab-content space-y-8">
+        <!-- SECTION 0: THỰC TRẠNG & KHÁI NIỆM -->
+        <section id="section-insights" class="tab-content hidden space-y-8">
             <div class="bg-gradient-to-r from-purple-900/40 via-night-800 to-indigo-900/40 p-6 lg:p-8 rounded-2xl border border-purple-500/30">
                 <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-xs rounded-full border border-purple-500/30 uppercase font-semibold">Góc Nhìn Thực Tế</span>
                 <h1 class="text-2xl lg:text-4xl font-bold mt-3 text-white">Thức Khuya Chủ Động Ở Học Sinh THPT Hiện Nay</h1>
                 <p class="text-slate-300 mt-2 text-sm lg:text-base leading-relaxed">
-                    Tại sao sĩ tử THPT biết thức khuya có hại nhưng vẫn chọn thức? Hiểu đúng về tâm lý "trả thù thời gian" và tìm kiếm giải pháp hài hòa giữa áp lực thi cử và sức khỏe.
+                    Tại sao sĩ tử THPT biết thức khuya có hại nhưng vẫn chọn thức? Hiểu đúng về tâm lý "trả thù thời gian" và tìm kiếm giải pháp hài hòa giữa áp lực thi cử và sức khỏe[cite: 1].
                 </p>
             </div>
 
-            <!-- Comparison Cards: Thụ động vs Chủ động -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-night-800 p-6 rounded-2xl border border-slate-800 border-l-4 border-l-amber-500">
                     <div class="flex items-center gap-3 mb-3">
@@ -145,7 +145,7 @@
                         <h3 class="text-lg font-bold text-white">1. Thức Khuya Thụ Động (Vì Áp Lực)</h3>
                     </div>
                     <p class="text-xs text-slate-300 leading-relaxed">
-                        Do lịch học dày đặc từ trường tới các lớp học thêm, bài tập về nhà quá nhiều, dồn dập trước các kỳ thi quan trọng (Thi HK, Thi ĐGNL, Thi tốt nghiệp THPT). Học sinh bắt buộc phải đánh đổi thời gian ngủ để chạy deadline.
+                        Do lịch học dày đặc từ trường tới các lớp học thêm, bài tập về nhà quá nhiều, dồn dập trước các kỳ thi quan trọng. Học sinh bắt buộc phải đánh đổi thời gian ngủ để chạy deadline.
                     </p>
                 </div>
 
@@ -155,12 +155,11 @@
                         <h3 class="text-lg font-bold text-white">2. Thức Khuya Chủ Động (Tâm Lý "Trả Thù")</h3>
                     </div>
                     <p class="text-xs text-slate-300 leading-relaxed">
-                        Hiện tượng <em>Revenge Bedtime Procrastination</em>. Ban ngày học sinh cảm thấy bị kiểm soát thời gian. Đêm muộn là khoảnh khắc duy nhất họ cảm thấy "thuộc về mình" để lướt TikTok, xem phim, chơi game hay nói chuyện với bạn bè dù biết sáng mai phải dậy sớm.
+                        Hiện tượng <em>Revenge Bedtime Procrastination</em>. Ban ngày học sinh cảm thấy bị kiểm soát thời gian. Đêm muộn là khoảnh khắc duy nhất họ cảm thấy "thuộc về mình" để lướt TikTok, xem phim hay nhắn tin.
                     </p>
                 </div>
             </div>
 
-            <!-- Statistics Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div class="bg-night-800 p-5 rounded-xl border border-slate-800 text-center">
                     <span class="text-3xl font-extrabold text-purple-400 block">78%</span>
@@ -177,7 +176,7 @@
             </div>
         </section>
 
-        <!-- SECTION 1: SURVEY & ANALYTICS -->
+        <!-- SECTION 1: KHẢO SÁT THỰC TRẠNG -->
         <section id="section-survey" class="tab-content hidden space-y-8">
             <div class="bg-gradient-to-r from-purple-900/40 via-night-800 to-indigo-900/40 p-6 lg:p-8 rounded-2xl border border-purple-500/30">
                 <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-xs rounded-full border border-purple-500/30 uppercase font-semibold">Khảo Sát Thực Trạng</span>
@@ -214,7 +213,7 @@
             </div>
         </section>
 
-        <!-- SECTION 2: SLEEP CALCULATOR -->
+        <!-- SECTION 2: TÍNH CHU KỲ GIẤC NGỦ -->
         <section id="section-calculator" class="tab-content hidden space-y-8">
             <div class="bg-night-800 p-6 lg:p-8 rounded-2xl border border-slate-800 max-w-4xl mx-auto shadow-xl">
                 <div class="text-center max-w-2xl mx-auto mb-8">
@@ -223,7 +222,7 @@
                     </div>
                     <h2 class="text-2xl lg:text-3xl font-bold text-white">Tính Chu Kỳ Giấc Ngủ (90 Phút)</h2>
                     <p class="text-slate-400 text-sm mt-2">
-                        Thức dậy ở điểm giao giữa các chu kỳ (REM) giúp bạn tỉnh táo tức thì, không bị quáng gà hay mệt mỏi.
+                        Thức dậy ở điểm giao giữa các chu kỳ (REM) giúp bạn tỉnh táo tức thì, không bị mệt mỏi hay quáng gà.
                     </p>
                 </div>
 
@@ -238,7 +237,7 @@
 
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-2">Nếu đi ngủ BÂY GIỜ:</label>
-                        <p class="text-xs text-slate-400 mb-3">(Đã cộng 14 phút để ru ngủ)</p>
+                        <p class="text-xs text-slate-400 mb-3">(Đã cộng 14 phút thời gian ru ngủ)</p>
                         <button onclick="calculateWakeTimesNow()" class="w-full py-3 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-lg transition">
                             Tính giờ nên dậy
                         </button>
@@ -281,7 +280,7 @@
                 <div class="bg-night-800 p-6 rounded-2xl border border-slate-800 shadow-xl space-y-6">
                     <div>
                         <h3 class="text-lg font-bold text-purple-300 mb-1"><i class="fa-solid fa-headphones mr-2"></i>Âm Thanh Tập Trung</h3>
-                        <p class="text-xs text-slate-400">Tiếng ồn trắng tổng hợp thời gian thực hỗ trợ học tập & dễ đi vào giấc ngủ.</p>
+                        <p class="text-xs text-slate-400">Tiếng ồn trắng hỗ trợ học tập & giúp dễ đi vào giấc ngủ.</p>
                     </div>
 
                     <div class="space-y-4">
@@ -300,8 +299,8 @@
                             <div class="flex items-center gap-3">
                                 <i class="fa-solid fa-wave-square text-indigo-400 text-lg"></i>
                                 <div>
-                                    <p class="text-sm font-medium text-slate-200">Sóng Alpha</p>
-                                    <p class="text-xs text-slate-500">Tăng tập trung não bộ</p>
+                                    <p class="text-sm font-medium text-slate-200">Tiếng Ồn Trắng (Alpha)</p>
+                                    <p class="text-xs text-slate-500">Giảm xao lãng trí não</p>
                                 </div>
                             </div>
                             <button onclick="toggleSound('alpha')" id="sound-btn-alpha" class="px-3 py-1.5 bg-slate-800 text-xs font-semibold rounded-lg text-slate-300 border border-slate-700">Bật</button>
@@ -311,72 +310,76 @@
             </div>
         </section>
 
-        <!-- SECTION 4: HEALTH HANDBOOK (CẬP NHẬT MỚI QUY TẮC 10-3-2-1-0) -->
-        <section id="section-handbook" class="tab-content hidden space-y-8">
+        <!-- SECTION 4: HEALTH & LIFESTYLE HANDBOOK -->
+        <section id="section-handbook" class="tab-content space-y-8">
             <div class="text-center max-w-3xl mx-auto">
-                <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30 uppercase font-semibold">Cẩm Nang Sĩ Tử</span>
-                <h2 class="text-3xl font-bold text-white mt-2">Phương Pháp Học Đêm An Toàn & Khoa Học</h2>
-                <p class="text-slate-400 text-sm mt-2">Áp dụng các mẹo khoa học để bảo vệ bộ não khi buộc phải học muộn.</p>
+                <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs rounded-full border border-cyan-500/30 uppercase font-semibold">Bộ Cẩm Nang Sĩ Tử</span>
+                <h2 class="text-3xl font-bold text-white mt-2">Cẩm Nang Thức Khuya An Toàn & Khoa Học</h2>
+                <p class="text-slate-400 text-sm mt-2">Tổng hợp quy tắc, kỹ thuật tâm lý và mẹo sinh hoạt dành riêng cho học sinh THPT.</p>
             </div>
 
-            <!-- Quy tắc 10-3-2-1-0 Special Card -->
-            <div class="bg-gradient-to-r from-indigo-900/50 via-night-800 to-purple-900/50 p-6 rounded-2xl border border-purple-500/30">
+            <!-- Quy tắc 10-3-2-1-0 -->
+            <div class="bg-gradient-to-r from-indigo-900/50 via-night-800 to-purple-900/50 p-6 rounded-2xl border border-purple-500/30 shadow-xl">
                 <h3 class="text-xl font-bold text-purple-300 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-star text-amber-400"></i> Quy Tắc 10-3-2-1-0 Cho Sĩ Tử THPT
+                    <i class="fa-solid fa-star text-amber-400"></i> Quy Tắc 10-3-2-1-0 Tối Ưu Giấc Ngủ
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-xs">
                     <div class="bg-night-900/80 p-3 rounded-xl border border-slate-800">
                         <span class="text-lg font-bold text-cyan-400 block mb-1">10 Giờ</span>
-                        Không uống Caffeine (Cà phê, bò húc, trà sữa) trước khi ngủ.
+                        Không tiêu thụ Caffeine (Cà phê, trà sữa, nước tăng lực) trước khi đi ngủ.
                     </div>
                     <div class="bg-night-900/80 p-3 rounded-xl border border-slate-800">
                         <span class="text-lg font-bold text-purple-400 block mb-1">3 Giờ</span>
-                        Không ăn quá no hoặc thức ăn cay nóng/nhiều dầu mỡ.
+                        Ngừng ăn thức ăn quá no, nhiều mỡ hoặc đồ cay nóng.
                     </div>
                     <div class="bg-night-900/80 p-3 rounded-xl border border-slate-800">
                         <span class="text-lg font-bold text-pink-400 block mb-1">2 Giờ</span>
-                        Dừng việc suy nghĩ/lo lắng về các bài tập khó.
+                        Dừng công việc/bài tập đòi hỏi tư duy quá căng thẳng.
                     </div>
                     <div class="bg-night-900/80 p-3 rounded-xl border border-slate-800">
                         <span class="text-lg font-bold text-amber-400 block mb-1">1 Giờ</span>
-                        Tắt màn hình điện thoại/máy tính hoặc bật Grayscale.
+                        Tắt màn hình thiết bị điện tử hoặc bật chế độ lọc ánh sáng xanh.
                     </div>
                     <div class="bg-night-900/80 p-3 rounded-xl border border-slate-800">
                         <span class="text-lg font-bold text-emerald-400 block mb-1">0 Báo Thức</span>
-                        Không bấm hoãn báo thức (Snooze) vào buổi sáng.
+                        Không bấm nút hoãn báo thức (Snooze) vào buổi sáng.
                     </div>
                 </div>
             </div>
 
+            <!-- Các Cẩm Nang Mới -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-night-800 p-6 rounded-2xl border border-slate-800">
-                    <div class="w-10 h-10 bg-purple-500/20 text-purple-400 rounded-lg flex items-center justify-center mb-4 text-xl">
-                        <i class="fa-solid fa-bolt"></i>
+                <div class="bg-night-800 p-6 rounded-2xl border border-slate-800 hover:border-purple-500/40 transition">
+                    <div class="w-10 h-10 bg-pink-500/20 text-pink-400 rounded-lg flex items-center justify-center mb-4 text-xl">
+                        <i class="fa-solid fa-heart-pulse"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-100 mb-2">Quản Lý Ánh Sáng Màn Hình</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Chuyển màn hình điện thoại sang chế độ Đen-Trắng (Grayscale) và bật Night Shift sau 21h00. Ánh sáng xanh ngăn cản tuyến tùng tiết ra Melatonin - hormone gây buồn ngủ tự nhiên.
-                    </p>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">1. Cẩm Nang Giải Tỏa Tâm Lý Ban Đêm</h3>
+                    <ul class="text-xs text-slate-400 space-y-2 leading-relaxed list-disc list-inside">
+                        <li><strong class="text-slate-200">Kỹ thuật thở 4-7-8:</strong> Hít vào bằng mũi 4 giây, giữ hơi 7 giây, thở ra bằng miệng 8 giây để kích hoạt hệ thần kinh phó giao cảm, làm giảm lo âu trước khi ngủ.</li>
+                        <li><strong class="text-slate-200">Viết xả não (Brain Dump):</strong> Viết toàn bộ suy nghĩ hay nỗi lo bài vở ra một quyển sổ tay trước khi lên giường để "giải phóng" bộ nhớ tạm thời của não.</li>
+                    </ul>
                 </div>
 
-                <div class="bg-night-800 p-6 rounded-2xl border border-slate-800">
+                <div class="bg-night-800 p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/40 transition">
                     <div class="w-10 h-10 bg-cyan-500/20 text-cyan-400 rounded-lg flex items-center justify-center mb-4 text-xl">
-                        <i class="fa-solid fa-battery-half"></i>
+                        <i class="fa-solid fa-desktop"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-100 mb-2">Power Nap 20 Phút Buổi Trưa</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Nếu đêm trước ngủ thiếu (dưới 6 tiếng), hãy tranh thủ chợp mắt đúng 20 phút từ 12h30-12h50. Đừng ngủ trưa quá 30 phút vì sẽ rơi vào giấc ngủ sâu khiến chiều thức dậy uể ủe.
-                    </p>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">2. Cẩm Nang Môi Trường Học Đêm</h3>
+                    <ul class="text-xs text-slate-400 space-y-2 leading-relaxed list-disc list-inside">
+                        <li><strong class="text-slate-200">Ánh sáng kép (Dual Lighting):</strong> Luôn kết hợp đèn trần dịu nhẹ cùng đèn bàn vàng (3000K-4000K) để tránh sự chênh lệch độ sáng lớn gây mỏi mắt.</li>
+                        <li><strong class="text-slate-200">Chống xao lãng kỹ thuật số:</strong> Bật chế độ Focus Mode chặn thông báo MXH sau 22h và dùng tiện ích như BlockSite để giữ tập trung tuyệt đối.</li>
+                    </ul>
                 </div>
 
-                <div class="bg-night-800 p-6 rounded-2xl border border-slate-800">
-                    <div class="w-10 h-10 bg-indigo-500/20 text-indigo-400 rounded-lg flex items-center justify-center mb-4 text-xl">
-                        <i class="fa-solid fa-apple-whole"></i>
+                <div class="bg-night-800 p-6 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
+                    <div class="w-10 h-10 bg-amber-500/20 text-amber-400 rounded-lg flex items-center justify-center mb-4 text-xl">
+                        <i class="fa-solid fa-sun"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-100 mb-2">Dinh Dưỡng Đêm Thông Minh</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Khi bụng cồn cào lúc 23h, hãy ưu tiên uống 1 ly sữa ấm, ăn vài hạt hạnh nhân/walnut hoặc 1 nửa quả chuối. Tránh ăn mì tôm hay snack nhiều muối gây tích nước và mệt mỏi sáng hôm sau.
-                    </p>
+                    <h3 class="text-lg font-bold text-slate-100 mb-2">3. Cẩm Nang Phục Hồi Buổi Sáng</h3>
+                    <ul class="text-xs text-slate-400 space-y-2 leading-relaxed list-disc list-inside">
+                        <li><strong class="text-slate-200">Cấp nước & Ánh nắng:</strong> Uống ngay 1 ly nước ấm lớn và đón ánh nắng sáng 5 phút để ngừng sản sinh hormone buồn ngủ (Melatonin).</li>
+                        <li><strong class="text-slate-200">Caffeine đúng giờ:</strong> Chỉ dùng cà phê vào khoảng 9h30 sáng (khi lượng Cortisol tự nhiên giảm) để tránh gây ép tim hoặc mất sức về chiều.</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -384,29 +387,35 @@
         <!-- SECTION 5: AI GEMINI ADVISOR -->
         <section id="section-ai-advisor" class="tab-content hidden space-y-8">
             <div class="bg-night-800 p-6 rounded-2xl border border-slate-800 shadow-xl max-w-4xl mx-auto">
-                <div class="flex items-center gap-3 border-b border-slate-800 pb-4 mb-4">
-                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl flex items-center justify-center text-white">
-                        <i class="fa-solid fa-robot text-xl"></i>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl flex items-center justify-center text-white flex-shrink-0">
+                            <i class="fa-solid fa-robot text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Trợ Lý AI Đêm Khuya (Gemini 2.5 Flash)</h2>
+                            <p class="text-xs text-slate-400">Tư vấn thời gian biểu ôn thi & giải tỏa áp lực học tập THPT</p>
+                        </div>
                     </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-white">Trợ Lý AI Đêm Khuya (Gemini 2.5 Flash)</h2>
-                        <p class="text-xs text-slate-400">Tư vấn thời gian biểu ôn thi & giải tỏa áp lực học tập THPT</p>
+                    
+                    <!-- Ô Nhập API Key Trực Tiếp -->
+                    <div class="flex items-center gap-2 bg-night-900 px-3 py-1.5 rounded-xl border border-purple-500/30">
+                        <i class="fa-solid fa-key text-purple-400 text-xs"></i>
+                        <input type="password" id="gemini-api-key" placeholder="Nhập API Key Gemini..." class="bg-transparent text-xs text-white focus:outline-none w-36 sm:w-44" onchange="saveApiKey(this.value)">
                     </div>
                 </div>
 
                 <div id="ai-chat-box" class="h-80 overflow-y-auto space-y-4 pr-2 mb-4">
                     <div class="flex gap-3">
-                        <div class="w-8 h-8 rounded-full bg-purple-600/30 text-purple-300 flex items-center justify-center text-xs flex-shrink-0">
-                            AI
-                        </div>
+                        <div class="w-8 h-8 rounded-full bg-purple-600/30 text-purple-300 flex items-center justify-center text-xs flex-shrink-0">AI</div>
                         <div class="bg-night-900 border border-slate-800 p-3 rounded-2xl rounded-tl-none text-xs text-slate-300 max-w-[85%] leading-relaxed">
-                            Chào sĩ tử THPT! Tôi là AI cố vấn sức khỏe & học tập. Bạn đang cần sắp xếp lịch học đêm hay tư vấn về thói quen ngủ hôm nay?
+                            Chào sĩ tử THPT! Tôi là AI cố vấn sức khỏe & học tập. Bạn đang cần sắp xếp lịch học đêm hay tư vấn giải tỏa căng thẳng?
                         </div>
                     </div>
                 </div>
 
                 <div class="flex gap-2">
-                    <input type="text" id="ai-prompt-input" placeholder="Ví dụ: Mình phải học đến 1h sáng để ôn thi ĐGNL, gợi ý lịch nghỉ ngơi giúp mình..." class="flex-1 bg-night-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500" onkeypress="if(event.key==='Enter') sendAiMessage()">
+                    <input type="text" id="ai-prompt-input" placeholder="Ví dụ: Gợi ý cho mình bài tập thư giãn 5 phút trước khi ngủ..." class="flex-1 bg-night-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-500" onkeypress="if(event.key==='Enter') sendAiMessage()">
                     <button onclick="sendAiMessage()" id="ai-send-btn" class="px-5 py-3 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-xl transition flex items-center justify-center">
                         <i class="fa-solid fa-paper-plane"></i>
                     </button>
@@ -416,6 +425,7 @@
 
     </main>
 
+    <!-- FOOTER -->
     <footer class="bg-night-800 border-t border-purple-900/30 py-6 mt-12">
         <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
             <p class="mb-2">Dự Án Nghiên Cứu & Hỗ Trợ Học Sinh THPT: "Chủ Động Thức Khuya Khoa Học"</p>
@@ -423,7 +433,9 @@
         </div>
     </footer>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
+        // Chuyển Tab
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -441,15 +453,17 @@
             }
         }
 
+        // Bật/tắt Menu Mobile
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
+        // Dữ liệu Khảo sát
         const surveyQuestionsData = [
             "1. Bạn có thường xuyên thức sau 23:00 không?",
             "2. Mục đích chính của bạn khi thức khuya là gì? (Học bài/Giải trí)",
             "3. Bạn thức khuya do bài tập quá nhiều hay muốn có không gian riêng giải trí?",
-            "4. Mức độ tập trung học tập của bạn vào ban đêm so with ban ngày thế nào?",
+            "4. Mức độ tập trung học tập của bạn vào ban đêm so với ban ngày thế nào?",
             "5. Bạn có uống cà phê, trà sữa hoặc nước tăng lực sau 20h00 không?",
             "6. Bạn thường ngủ trung bình bao nhiêu tiếng mỗi đêm?",
             "7. Bạn có cảm thấy ngáp dài, buồn ngủ trong các tiết học buổi sáng không?",
@@ -467,6 +481,7 @@
 
         function initSurveyQuestions() {
             const container = document.getElementById('survey-questions');
+            if(!container) return;
             container.innerHTML = surveyQuestionsData.map((q, idx) => `
                 <div class="p-4 bg-night-900 rounded-xl border border-slate-800">
                     <p class="text-sm font-medium text-slate-200 mb-3">${q}</p>
@@ -485,7 +500,8 @@
         }
 
         function initSurveyChart(dataArr) {
-            const ctx = document.getElementById('surveyChart').getContext('2d');
+            const ctx = document.getElementById('surveyChart')?.getContext('2d');
+            if (!ctx) return;
             if (surveyChartInstance) surveyChartInstance.destroy();
 
             surveyChartInstance = new Chart(ctx, {
@@ -513,13 +529,13 @@
             document.getElementById('quick-survey-result').innerHTML = `
                 <div class="p-3 bg-purple-900/30 border border-purple-500/40 rounded-xl text-purple-200 text-xs leading-relaxed">
                     <i class="fa-solid fa-circle-check text-purple-400 mr-1"></i> <strong>Đã ghi nhận dữ liệu!</strong><br>
-                    Kết quả cho thấy bạn đang gặp tình trạng giao thoa giữa áp lực thi cử và nhu cầu giải trí ban đêm. Hãy thử tính chu kỳ giấc ngủ để tối ưu hóa thời gian ngủ!
+                    Kết quả cho thấy bạn đang gặp tình trạng giao thoa giữa áp lực thi cử và nhu cầu giải trí ban đêm. Hãy tham khảo Cẩm Nang Sức Khỏe để điều chỉnh nhịp sinh học!
                 </div>
             `;
             initSurveyChart([60, 25, 15]);
         }
 
-        /* Sleep Calculator */
+        // Tính toán giấc ngủ
         function calculateBedTimes() {
             const wakeVal = document.getElementById('wake-time').value;
             if(!wakeVal) return;
@@ -564,7 +580,7 @@
             `).join('');
         }
 
-        /* Pomodoro Timer */
+        // Đồng hồ Pomodoro
         let timerSeconds = 25 * 60;
         let timerInterval = null;
         let isTimerRunning = false;
@@ -616,7 +632,7 @@
             updateTimerDisplay();
         }
 
-        /* Audio Synthesizer */
+        // Âm thanh tập trung
         let audioCtx = null;
         let activeSoundNodes = {};
 
@@ -644,7 +660,7 @@
                 filter.frequency.value = type === 'rain' ? 800 : 300;
 
                 let gainNode = audioCtx.createGain();
-                gainNode.gain.value = 0.15;
+                gainNode.gain.value = 0.12;
 
                 whiteNoise.connect(filter);
                 filter.connect(gainNode);
@@ -658,13 +674,39 @@
             }
         }
 
-        /* AI Gemini Integration */
+        // AI Gemini Integration
+        function saveApiKey(key) {
+            localStorage.setItem('nightshift_gemini_key', key.trim());
+        }
+
         async function sendAiMessage() {
             const input = document.getElementById('ai-prompt-input');
             const chatBox = document.getElementById('ai-chat-box');
             const text = input.value.trim();
             if (!text) return;
 
+            // Lấy API Key từ ô nhập hoặc localStorage
+            const apiKeyInput = document.getElementById('gemini-api-key');
+            const apiKey = apiKeyInput.value.trim() || localStorage.getItem('nightshift_gemini_key') || "";
+
+            if (!apiKey) {
+                chatBox.innerHTML += `
+                    <div class="flex gap-3 justify-end">
+                        <div class="bg-purple-600 text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed">${text}</div>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-red-600/30 text-red-300 flex items-center justify-center text-xs flex-shrink-0">!</div>
+                        <div class="bg-red-900/30 border border-red-500/40 p-3 rounded-2xl rounded-tl-none text-xs text-red-200 max-w-[85%] leading-relaxed">
+                            <strong>Chưa nhập API Key:</strong> Vui lòng nhập API Key Gemini của bạn ở ô phía trên góc phải khung chat để bắt đầu trò chuyện.
+                        </div>
+                    </div>
+                `;
+                input.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+                return;
+            }
+
+            // Hiển thị câu hỏi người dùng
             chatBox.innerHTML += `
                 <div class="flex gap-3 justify-end">
                     <div class="bg-purple-600 text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%] leading-relaxed">
@@ -675,6 +717,7 @@
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
+            // Loading state
             const loadingId = 'loading-' + Date.now();
             chatBox.innerHTML += `
                 <div id="${loadingId}" class="flex gap-3">
@@ -686,23 +729,33 @@
             `;
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-            const systemPrompt = "Bạn là trợ lý tư vấn sức khỏe & phương pháp học tập đêm cho học sinh THPT. Hãy trả lời ngắn gọn, đồng cảm, đúng khoa học.";
 
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: text }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                        contents: [
+                            {
+                                role: "user",
+                                parts: [{ text: text }]
+                            }
+                        ],
+                        systemInstruction: {
+                            parts: [{ text: "Bạn là Trợ lý AI cố vấn sức khỏe & phương pháp học tập đêm cho học sinh THPT. Hãy phản hồi ngắn gọn, thấu hiểu, đồng cảm và mang tính khoa học." }]
+                        }
                     })
                 });
-                const result = await response.json();
-                const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text || "Xin lỗi, hiện chưa thể trả lời. Vui lòng thử lại sau!";
 
-                document.getElementById(loadingId).remove();
+                if (!response.ok) {
+                    throw new Error(`Mã lỗi HTTP: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text || "Không nhận được phản hồi từ AI. Vui lòng thử lại!";
+
+                document.getElementById(loadingId)?.remove();
                 chatBox.innerHTML += `
                     <div class="flex gap-3">
                         <div class="w-8 h-8 rounded-full bg-purple-600/30 text-purple-300 flex items-center justify-center text-xs flex-shrink-0">AI</div>
@@ -710,13 +763,26 @@
                     </div>
                 `;
             } catch (err) {
-                document.getElementById(loadingId).remove();
+                document.getElementById(loadingId)?.remove();
+                chatBox.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-red-600/30 text-red-300 flex items-center justify-center text-xs flex-shrink-0">!</div>
+                        <div class="bg-night-900 border border-red-500/30 p-3 rounded-2xl rounded-tl-none text-xs text-red-300 max-w-[85%] leading-relaxed">
+                            Không thể kết nối với AI (${err.message}). Vui lòng kiểm tra lại API Key hoặc kết nối mạng!
+                        </div>
+                    </div>
+                `;
             }
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
+        // Tải cấu hình khi trang chạy xong
         window.onload = function() {
             initSurveyQuestions();
+            const savedKey = localStorage.getItem('nightshift_gemini_key');
+            if (savedKey) {
+                document.getElementById('gemini-api-key').value = savedKey;
+            }
         }
     </script>
 </body>
